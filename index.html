@@ -71,6 +71,15 @@
             width: 80%;
         }
 
+        .content {
+            padding: 20px;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
         footer {
             background-color: #333;
             color: white;
@@ -83,31 +92,59 @@
 <body>
     <header>Intorno all'affare Moro</header>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Catalogo</a>
-        <a href="#">Storia</a>
+        <a href="#" id="homeLink">Home</a>
+        <a href="#" id="catalogoLink">Catalogo</a>
+        <a href="#" id="storiaLink">Storia</a>
     </nav>
-    <div class="carousel">
-        <div class="slides">
+    <div id="home" class="content active">
+        <div class="carousel">
+            <div class="slides">
             <img src="https://www.repstatic.it/content/localirep/img/rep/2018/04/12/154512101-f7e8bb2a-b8a7-40e7-b068-60f890a243e7.jpg" alt="Immagine 1">
             <img src="https://www.ilprimatonazionale.it/wp-content/uploads/2019/03/404f9-rapimentomoro-730x417.jpg" alt="Immagine 2">
-            <img src="https://www.leccenews24.it/wp-content/uploads/2018/05/06184429/ritrovamento-alto-Moro-via-caetani-653x367.jpg" alt="Immagine 3">
+            <img src="https://www.leccenews24.it/wp-content/uploads/2018/05/06184429/ritrovamento-alto-Moro-via-caetani-653x367.jpg" alt="Immagine 3">
+            </div>
+            <div class="overlay">DESCRIZIONE PROGETTO</div>
         </div>
-        <div class="overlay">Il Progetto è finalizzato alla catalogazione e alla classificazione delle lettere di Aldo Moro scritte durante il sequestro e 
-la prigionia presso il covo delle Brigate Rosse. </div>
+    </div>
+    <div id="catalogo" class="content">
+        <h2>Catalogo</h2>
+        <ul>
+            <li>Catalogo completo</li>
+            <li>Catalogo per destinatari</li>
+        </ul>
+    </div>
+    <div id="storia" class="content">
+        <h2>Storia</h2>
+        <!-- Contenuto della sezione Storia -->
     </div>
     <footer>Progetto creato da Claudia Canforini per Alma mater studiorum</footer>
 
     <script>
-        let currentIndex = 0;
+        const homeLink = document.getElementById('homeLink');
+        const catalogoLink = document.getElementById('catalogoLink');
+        const storiaLink = document.getElementById('storiaLink');
 
-        function showNextSlide() {
-            const slides = document.querySelector('.slides');
-            currentIndex = (currentIndex + 1) % 3; // Assuming there are 3 images
-            slides.style.transform = `translateX(-${currentIndex * 100 / 3}%)`;
-        }
+        const home = document.getElementById('home');
+        const catalogo = document.getElementById('catalogo');
+        const storia = document.getElementById('storia');
 
-        setInterval(showNextSlide, 3000); // Change image every 3 seconds
+        homeLink.addEventListener('click', function() {
+            home.classList.add('active');
+            catalogo.classList.remove('active');
+            storia.classList.remove('active');
+        });
+
+        catalogoLink.addEventListener('click', function() {
+            home.classList.remove('active');
+            catalogo.classList.add('active');
+            storia.classList.remove('active');
+        });
+
+        storiaLink.addEventListener('click', function() {
+            home.classList.remove('active');
+            catalogo.classList.remove('active');
+            storia.classList.add('active');
+        });
     </script>
 </body>
 </html>
